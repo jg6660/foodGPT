@@ -1,0 +1,10 @@
+//recipespage.header.title: 'Recipes',
+//recipesPage.header.subtitle: "we'll help you with recipes'
+//
+//
+//
+//<FormattedMessage
+//  id="recipespage.header.title"
+//  defaultMessage="Recipes"
+//  values={{ts: Date.now()}}
+///>
