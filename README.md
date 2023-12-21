@@ -3,17 +3,10 @@ Food GPT
 
 v0.0.1
 
-This sample project integrates OpenAI's [GPT-4 Vision](https://openai.com/blog/chatgpt-can-now-see-hear-and-speak), with advanced image recognition capabilities, and [DALL·E 3](https://openai.com/dall-e-3), the state-of-the-art image generation model, with the [Chat completions API](https://platform.openai.com/docs/guides/gpt/chat-completions-api). This powerful combination allows for simultaneous image creation and analysis.
+This project integrates OpenAI's [GPT-4 Vision](https://openai.com/blog/chatgpt-can-now-see-hear-and-speak), with advanced image recognition capabilities, and [DALL·E 3](https://openai.com/dall-e-3), the state-of-the-art image generation model, with the [Chat completions API](https://platform.openai.com/docs/guides/gpt/chat-completions-api). This powerful combination allows for simultaneous image creation and analysis.
 
 
 **Updated**: Using [v4.19.1 OpenAI Node module](https://www.npmjs.com/package/openai)
-
-# Motivation
-
-I started this project with the aim of using image analysis with GPT-4. However, at that time, image input was not yet available. In lieu of image input in Chat API, I initially used [ml5's ImageClassifier](#ml5-image-classifier) instead, which proved to be quite effective for basic object analysis. In my opinion, if your goal is just to create an application like a ***Bring Me*** or ***Scavenger Hunt*** type of game app, it should probably suffice.
-
-Since the new APIs were released recently, following OpenAI DevDay, I have updated this sample project to utilize the latest APIs and models.
-
 
 # DALL·E 3
 
@@ -71,51 +64,15 @@ Here is the sample output
 {
   items: [
     {
-      prompt: 'Generate an album cover for the ska band Tsokolate, conveying a cool ska aesthetic. The background is white. Inside a vintage muscle car colored in aquamarine, three band members are dressed in chic suits. Two members are seated in the front, and the driver is wearing shades. One member is sitting in the back. The image size is 1024x1792 and the quality is standard.',
-      size: '1024x1792',
+      prompt: 'Creamy tomato mushroom pasta with fusilli, garnished with fresh herbs',
+      size: '1024x1024',
       quality: 'standard'
     }
   ]
 }
 ```
 
-If you want to generate multiple images, you can ask the AI to generate several prompts and tell it to proceed to create image based on all the prompts. We can handle it in one API call since we are using array in our function.
-
-```javascript
-let image_result = await Promise.all(
-    Array.from(image_items).map(async (img) => {
-
-        const image_prompt = img.prompt
-        const image_size = img.size
-        const image_quality = img.quality
-        
-        try {
-
-            const dalle_image = await openai.images.generate({ 
-                model: 'dall-e-3',
-                prompt: image_prompt,
-                quality: image_quality,
-                size: image_size
-            })
-
-            return {
-                prompt: image_prompt,
-                url: dalle_image.data[0].url
-            }
-
-        } catch(error) {
-
-            console.log(error.name, error.message)
-            
-            return null
-
-        }
-
-    })
-)
-```
-
-After receiveing the generated image urls from the API, we will then save a copy in our [/public/uploads](/public/uploads/) directory.
+After receiveing the generated image url from the API, we will then save a copy in our [/public/uploads](/public/uploads/) directory.
 
 ```javascript
 let image_list = await Promise.all(
@@ -153,57 +110,12 @@ We will just send the status and message. We will directly send the image data a
 
 # GPT-4 Vision
 
-For image analysis, we will be using the new [GPT-4 with Vision](https://platform.openai.com/docs/guides/vision), currently still in ***preview mode*** which means we only got **100 RPD**!
+For image analysis, we will be using the new [GPT-4 with Vision](https://platform.openai.com/docs/guides/vision)
 
-In the app, there are two ways to send image for analysis: send image with query and refer to any image in the conversation.
-
-Currently, you can send as many as 10 images when you send your query. You can edit the number from `next.config.js` file:
-
-```javascript
-env: {
-    ...
-    maxFileUploadCount: 10,
-},
-```
-
-When you refer to an image in the conversation for image analysis, function calling will be triggered:
-
-```javascript
-{
-    "name": "get_image_for_analysis",
-    "description": "Get image data referenced by the user from conversation history",
-    "parameters": {
-        "type": "object",
-        "properties": {
-            "images": {
-                "type": "array",
-                "description": "An array of the image data referenced by the user, in URL form",
-                "items": {
-                    "type": "string",
-                    "description": "Image data represented by a relative URL"
-                }
-            },
-            "query": {
-                "type": "string",
-                "description": "Query of the user"
-            }
-        },
-        "required": ["images", "query"]
-    }
-}
-```
-
-Here is the sample output
-
-```javascript
-{
-  images: [ '/uploads/tmp170061562847486897_yasai.jpeg' ],
-  query: 'Identify long green vegetable'
-}
-```
+In this application, we will send an image with a query for image analysis
 
 The GPT-4V supports image input either via URL or Base64 image. If URL, we will need it hosted somewhere with https. But we are using relative paths!
-No problemo. We have all the image files saved in the `/public/uploads` directory.
+No problem. We have all the image files saved in the `/public/uploads` directory.
 
 When you send image with the query, we first upload the image and only send the relative url and base64 data with the query.
 
