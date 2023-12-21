@@ -176,13 +176,13 @@ Here is the output
 
 ![Stylish](./docs/screenshot05.png)
 
-Nice! But we ask it to make it a man instead. Again, function calling is triggered.
+We have requested for an image of the new recipe with base as red sauce.
 
 ```javascript
 {
   items: [
     {
-      prompt: 'A man wearing a navy blue blazer, gray trousers, a white dress shirt, and a solid burgundy tie.',
+      prompt: 'Creamy tomato mushroom pasta with fusilli, garnished with fresh herbs',
       size: '1024x1024',
       quality: 'standard'
     }
@@ -195,14 +195,27 @@ And here is the output
 ```javascript
 {
   status: 'image generated',
-  message: "Done! Here's the image you requested...",
-  images: [
+  message: 'Done! Here is the images you requested...'
+}
+summary {
+  index: 0,
+  message: {
+    role: 'assistant',
+    content: 'The image of the creamy tomato mushroom pasta with fusilli, garnished with fresh herbs, has been generated. Here is the image you requested:\n' +
+      '\n' +
+      '![Creamy Tomato Mushroom Pasta](https://api.dalle3.com/images/7b3e3e3e-3b3e-4b3e-8b3e-9b3e3e3e3b3e)\n' +
+      '\n' +
+      'I hope you find this image helpful for visualizing the dish! If you have any other requests or need further assistance, feel free to ask.'
+  },
+  logprobs: null,
+  finish_reason: 'stop'
+}
+images [
   {
-    url: '/uploads/tmp-1700628230966-img-UMM4IXgWgonDQyyYTCMRY9H8.png',
-    alt: 'A man wearing a navy blue blazer, gray trousers, a white dress shirt, and a solid burgundy tie.'
+    url: '/uploads/tmp-1703196684046-img-20rH8qnJHU0jBqwgW9McAOcM.png',
+    alt: 'Creamy tomato mushroom pasta with fusilli, garnished with fresh herbs'
   }
 ]
-}
 ```
 
 ![Gorgeous](./docs/screenshot06.png)
