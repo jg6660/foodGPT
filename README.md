@@ -1,4 +1,4 @@
-chatgpt-with-image-sample
+Food GPT
 =====
 
 v0.0.1
