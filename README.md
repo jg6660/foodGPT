@@ -127,55 +127,64 @@ So, we are always sending base64 image data!
 
 Here is a sample conversation using image analysis and creation.
 
-![Which pants?](./docs/screenshot01.png)
+![Uploaded white mushroom cream sauce pasta?](./docs/Screenshot01.png)
 
-I uploaded 3 images of different pants and laid out a scenario and ask for fashion recommendation. So this will go straight to GPT-4V.
+I uploaded an image of white cream sauce pasta and have requested it to let me know the ingredients as well the recipe to make the dish. So this will go straight to GPT-4V.
 
-I then ask follow up question for color of jacket, it tells me the appropriate color. Based on this, I uploaded 3 jackets of that color and ask for suggestion.
+Then it has generated the response describing the ingredients and recipe for the dish
 
-![Which jacket?](./docs/screenshot02.png)
+![Recipe and Ingredients?](./docs/Screenshot02.png)
 
-Again, this will go straight to GPT-4V for analysis.
-
-I ask for what color of the tie will be good for gray pants and navy blue jacket. It gave me two suggestions: deep red and burgundy. So, I again scoured the web for such ties, uploaded it and ask it which one will be good.
-
-![Which tie?](./docs/screenshot03.png)
-
-![Which tie...](./docs/screenshot04.png)
-
-Okay, now we are all set. The wardrobe is complete. So I ask it to create the image of what I may look like wearing its fashion recommendation.
-
-Under the hood, the function calling is triggered
+Next, I have requested it to generate a different recipe with the same ingredients and using red sauce as the base.
+Now, this will go straight to GPT-3.5 for analysis.
 
 ```javascript
-{
-  items: [
-    {
-      prompt: 'A person wearing a navy blue blazer, gray trousers, a white dress shirt, and a solid burgundy tie. The person is standing in a professional setting.',
-      size: '1024x1024',
-      quality: 'standard'
-    }
-  ]
+function call {
+  index: 0,
+  message: {
+    role: 'assistant',
+    content: "Certainly! You can create a delicious pasta dish using a red sauce and the same ingredients. Here's a recipe for a creamy tomato mushroom pasta:\n" +
+      '\n' +
+      'Ingredients:\n' +
+      '- 8 oz (225g) pasta (such as fusilli)\n' +
+      '- 2 tablespoons olive oil\n' +
+      '- 1 small onion, finely chopped\n' +
+      '- 2 cloves garlic, minced\n' +
+      '- 8 oz (225g) mushrooms, sliced\n' +
+      '- 1 can (14 oz) crushed tomatoes\n' +
+      '- 1/2 cup (120ml) heavy cream or half-and-half\n' +
+      '- 1/2 cup (50g) grated Parmesan cheese\n' +
+      '- Salt and pepper, to taste\n' +
+      '- Fresh herbs (such as basil or oregano) for garnish\n' +
+      '- Optional: red pepper flakes for a spicy kick\n' +
+      '\n' +
+      'Instructions:\n' +
+      '1. Cook the pasta according to the package instructions in a large pot of salted boiling water until al dente. Drain and set aside.\n' +
+      '\n' +
+      '2. While the pasta is cooking, heat the olive oil in a large skillet over medium heat. Add the chopped onion and cook until translucent, about 2-3 minutes.\n' +
+      '\n' +
+      '3. Add the minced garlic and sliced mushrooms to the skillet. Cook until the mushrooms are soft and browned, about 5-7 minutes.\n' +
+      '\n' +
+      '4. Pour in the crushed tomatoes and bring the mixture to a simmer. Let it cook for a few minutes to allow the flavors to meld.\n' +
+      '\n' +
+      '5. Stir in the heavy cream and grated Parmesan cheese. Let the sauce simmer for a few more minutes until it thickens slightly.\n' +
+      '\n' +
+      '6. Season the sauce with salt, pepper, and optional red pepper flakes for a spicy kick.\n' +
+      '\n' +
+      '7. Add the cooked pasta to the skillet with the sauce and toss to coat the pasta evenly.\n' +
+      '\n' +
+      '8. Serve the pasta hot, garnished with fresh herbs.\n' +
+      '\n' +
+      "This creamy tomato mushroom pasta is a flavorful alternative to the creamy white sauce version, and it's sure to be a hit at the dinner table!"
+  },
+  logprobs: null,
+  finish_reason: 'stop'
 }
 ```
 
-Here is the output
+![Recipe and Ingredients with red sauce](./docs/Screenshot03.png)
 
-```javascript
-{
-  status: 'image generated',
-  message: "Done! Here's the image you requested...",
-  images: [
-  {
-    url: '/uploads/tmp-1700628156120-img-JjENGYQcLJ0q7E98XeRlUuQO.png',
-    alt: 'A person wearing a navy blue blazer, gray trousers, a white dress shirt, and a solid burgundy tie. The person is standing in a professional setting.'
-  }
-]
-}
-```
-
-![Stylish](./docs/screenshot05.png)
-
+Now I have requested to generate the image of the corresponding pasta. It triggers the dall-e function.
 We have requested for an image of the new recipe with base as red sauce.
 
 ```javascript
@@ -218,7 +227,7 @@ images [
 ]
 ```
 
-![Gorgeous](./docs/screenshot06.png)
+![Gorgeous](./docs/Screenshot04.png)
 
 
 # Setup
