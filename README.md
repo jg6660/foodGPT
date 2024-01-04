@@ -1,9 +1,9 @@
-Food GPT
+Flavorful GPT
 =====
 
 v0.0.1
-
-This project integrates OpenAI's [GPT-4 Vision](https://openai.com/blog/chatgpt-can-now-see-hear-and-speak), with advanced image recognition capabilities, and [DALL·E 3](https://openai.com/dall-e-3), the state-of-the-art image generation model, with the [Chat completions API](https://platform.openai.com/docs/guides/gpt/chat-completions-api). This powerful combination allows for simultaneous image creation and analysis.
+Meet your kitchen sidekick! This chatbot is here to make cooking a breeze. Ask anything, get endless ideas, and create delicious dishes effortlessly.
+This project frontend interface is developed using React and integrated with OpenAI LLM API's like [GPT-4 Vision](https://openai.com/blog/chatgpt-can-now-see-hear-and-speak), with advanced image recognition capabilities, and [DALL·E 3](https://openai.com/dall-e-3), the state-of-the-art image generation model, with the [Chat completions API](https://platform.openai.com/docs/guides/gpt/chat-completions-api). This powerful combination allows for simultaneous image creation and analysis.
 
 
 **Updated**: Using [v4.19.1 OpenAI Node module](https://www.npmjs.com/package/openai)
@@ -235,9 +235,9 @@ images [
 Clone the repository and install the dependencies
 
 ```sh
-git clone https://github.com/supershaneski/chatgpt-with-image-sample.git myproject
+git clone https://github.com/jg6660/foodGPT.git flavorfulGPT
 
-cd myproject
+cd flavorfulGPT
 
 npm install
 ```
