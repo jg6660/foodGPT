@@ -1,4 +1,4 @@
-Flavorful GPT [Recording](https://drive.google.com/file/d/1l3IMFmlXQaRcWETwTtN9GTaocFD3L96O/view?usp=drive_link)
+Flavorful GPT ([Recording])(https://drive.google.com/file/d/1l3IMFmlXQaRcWETwTtN9GTaocFD3L96O/view?usp=drive_link)
 =====
 
 v0.0.1
